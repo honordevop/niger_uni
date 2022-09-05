@@ -1,0 +1,10 @@
+INSERT INTO universities (uni_name, vice_chancelor, vc_image, uni_image, about_uni, 
+						 location, uni_website, nuc_accr_courses, state_id, 
+						 uni_name_abbr, uni_ownership, contact_email, phone_num) VALUES ('Abia State University', 'Professor Onyemachi M. Ogbulu', 'http://abiastateuniversity.edu.ng/wp-content/uploads/2016/12/OGAM.jpg', 'http://abiastateuniversity.edu.ng/wp-content/uploads/2016/12/absu_gate-640x301.jpg', 
+								 'At Abia State University, we believe in education that empowers individuals towards excellence and service.
+As a foremost state University in Nigeria founded in 1981, Abia State University has maintained its leadership within and beyond the Eastern heartlands of Nigeria. It has remained resilient in the acquisition and dissemination of ICT-driven skills, comparable to graduates anywhere in Africa.', 
+								 'Uturu Abia State, Nigeria.', 'http://abiastateuniversity.edu.ng/', ARRAY ['Agricultural Science', 'Mechanical Engineering'], '1', 
+								 'ABSU', 'STATE', 'ics@abiastateuniversity.edu.ng', '07066166857'
+								 );
+								 
+SELECT * FROM universities;
