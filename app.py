@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-
+migrate = Migrate(app, db)
 
 class States(db.Model):
     __tablename__ = 'states'
@@ -34,4 +34,4 @@ class Universities(db.Model):
     contact_email = db.Column(db.String(250), nullable = True)
     phone_num = db.Column(db.String(), nullable = False)
 
-db.create_all()
+# db.create_all()
