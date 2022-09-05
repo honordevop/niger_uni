@@ -35,3 +35,21 @@ class Universities(db.Model):
     phone_num = db.Column(db.String(), nullable = False)
 
 # db.create_all()
+
+@app.route('/states/<state_id>')
+def get_universities_list(state_id):
+  return render_template('index.html', 
+  states=States.query.order_by('id').all(),
+  active_state = States.query.get(state_id),
+  universities=Universities.query.filter_by(state_id=state_id).order_by('id').all())
+
+
+@app.route('/')
+def index():
+  return redirect(url_for('get_universities_list', state_id=1))
+
+
+#always include this at the bottom of your code
+if __name__ == '__main__':
+  app.debug=True
+  app.run(host="0.0.0.0")
