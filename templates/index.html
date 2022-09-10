@@ -1,61 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <div class="states-wrapper">
-            <h4>SEARCH BY STATE</h4>
-            <form action="/states/create" method="POST" id="list-form">
-              <label for="states">Create List:</label>
-              <input type="text" name="todolist" id="todolist-input" placeholder="A new List" data-id="{{ active_state.id }}" />
-              <button type="submit">Create List</button>
-            </form>
-            <ul id="lists">
-              {% for state in states %}
-              <li>
-                <input type="checkbox" data-id="{{ state.id }}" class="state-check-completed">
-                <a href="/states/{{ state.id }}"> {{ state.state }} State </a>
-                <!-- <button class="delete-state" data-id="{{ state.id }}">&cross;</button> -->
-              </li>              
-              {% endfor %}
-            </ul>
-    </div>
+{% extends "base.html" %}
 
-    <div class="todos-wrapper">
-        <h4>{{ active_state.state }}</h4>
-    
-        <form id='form'>
-          <input id="state_id" type="hidden" value="{{ active_state.id }}">
-          <input type="text" id='uni_name' />
-          <input type="text" id='vice_chancelor' />
-          <input type="text" id='vc_image' />
-          <input type="text" id='uni_image' />
-          <input type="text" id='about_uni' />
-          <input type="text" id='location' />
-          <input type="text" id='uni_website' />
-          <input type="text" id='nuc_accr_courses' />
-          <input type="submit" value="Add University" />
-        </form>
-        <div class="hidden" id="error"> Something went wrong! </div>
-        <ul id='Universities'>
-          {% for university in universities %}
-    
-          <li class="university_list" id="university_list">
-    
-            <input class="check-completed" data-id="{{ university.id }}" type="checkbox">
-            {{ university.uni_name }}
-            <p> {{ university.location }} </p>
-            <button type="submit" class="delete-button" id="delete-todo" data-id="{{ university.id }}">&cross;</button>
-    
-          </li>
-    
-          {% endfor %}
-        </ul>
-      </div>
-</body>
-</html>
+{% block content %}
+<div>
+  <div class="states-wrapper">
+    <h4>SEARCH BY STATE</h4>
+    <form action="/states/create" method="POST" id="list-form">
+      <label for="states">Create List:</label>
+      <input type="text" name="todolist" id="todolist-input" placeholder="A new List" data-id="{{ active_state.id }}" />
+      <button type="submit">Create List</button>
+    </form>
+    <!-- 
+    <ul id="lists">
+      {% for state in states %}
+      <li>
+        <input type="checkbox" data-id="{{ state.id }}" class="state-check-completed">
+        <a href="/states/{{ state.id }}"> {{ state.state }} State </a>
+        <button class="delete-state" data-id="{{ state.id }}">&cross;</button>
+      </li>
+      {% endfor %}
+    -->
+    </ul>
+  </div>
+
+  <div class="todos-wrapper">
+    <h4>{{ active_state.state }}</h4>
+
+    <form id='form'>
+      <input id="state_id" type="hidden" value="{{ active_state.id }}">
+
+      <input type="text" id='uni_name' />
+      <input type="text" id='vice_chancelor' />
+      <input type="text" id='vc_image' />
+      <input type="text" id='uni_image' />
+      <input type="text" id='about_uni' />
+      <input type="text" id='location' />
+      <input type="text" id='uni_website' />
+      <input type="text" id='nuc_accr_courses' />
+      <input type="submit" value="Add University" />
+    </form>
+    <div class="hidden" id="error"> Something went wrong! </div>
+    <ul id='Universities'>
+      {% for university in universities %}
+
+      <li class="university_list" id="university_list">
+
+        <input class="check-completed" data-id="{{ university.id }}" type="checkbox">
+        {{ university.uni_name }}
+        <p> {{ university.location }} </p>
+        <button type="submit" class="delete-button" id="delete-todo" data-id="{{ university.id }}">&cross;</button>
+
+      </li>
+
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

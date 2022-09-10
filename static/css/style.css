@@ -1,0 +1,87 @@
+
+body, p, div, h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0;
+}
+
+/* NAV MENU CSS */
+.nav_bar {
+    background-color:  hsl(136, 100%, 33%);
+}
+
+.nav_container {
+    height: 4rem;
+    /* width: 100vw; */
+    display: flex;
+    /* align-self: auto; */
+    justify-content: space-between;
+    align-items: center;
+    /* column-gap: 10rem ; */
+}
+
+.whatsapp_svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    margin-right: .5rem;
+}
+
+.nav_link {
+    /* margin-right: 1rem; */
+    color: white;
+    /* font-size: 1rem; */
+}
+
+.nav_btn, .login_icon {
+    font-size: 2.5rem;
+    line-height: 0;
+    width: max-content;
+    align-items: center;
+    color: white;
+
+}
+
+.nav_btn {
+    display: none;
+}
+
+
+.login_icon {
+    display: block;
+    border: solid white 2px;
+    border-radius: 50%;
+    /* height: 44px;
+    width: 44px; */
+}
+
+.login_icon2 {
+    font-size: 1.25rem;
+    color: white;
+}
+
+.nav_item a {
+    display: block;
+}
+
+/* .nav_container {
+    display: flex;
+} */
+
+.drop_down_menu {
+    list-style: none;
+    display: flex;
+    /* column-gap: 2rem; */
+    align-items: center;
+    /* height: 10%; */
+    margin: auto;
+    padding: auto;
+}
+
+.login_icon {
+    margin-left: 2rem;
+}
+/* navbar navbar-expand-lg navbar-dark bg-dark */
+
+
+
+
