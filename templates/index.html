@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<section class="hero_section">
+  <div>
+    <img class="hero_img img-fluid" src="../static/images/university_img2.jpg" alt="">
+  </div>
+  <div class="hero_text">
+    <h1> Find and Locate tertiary Institutions in Nigeria.</h1>
+    <h2>Search through 14,080 Schools in Nigeria</h2>
+    <form class="row hero_search_form">
+      <div class="col-auto">
+        <input class="form-control" type="text" placeholder="Searh for schools in a State or particular School" aria-label=".form-control-sm example">
+      </div>
+      <div class="col-auto" style="background-color: white;">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+  </div>
+</section>
 <div>
   <div class="states-wrapper">
     <h4>SEARCH BY STATE</h4>

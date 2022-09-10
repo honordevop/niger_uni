@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:08164462713@localhost:5432/nigeruni'
@@ -33,8 +34,14 @@ class Universities(db.Model):
     state_id = db.Column(db.Integer, db.ForeignKey('states.id'), nullable=False)
     contact_email = db.Column(db.String(250), nullable = True)
     phone_num = db.Column(db.String(), nullable = False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
 # db.create_all()
+
+@app.route('/states')
+def get_all_states():
+  states=States.query.order_by('id').all()
+  return jsonify(states.state)
 
 @app.route('/states/<state_id>')
 def get_universities_list(state_id):
