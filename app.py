@@ -41,7 +41,7 @@ class Universities(db.Model):
     contact_email = db.Column(db.String(250), nullable = True)
     phone_num = db.Column(db.String(), nullable = False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    ownership_id = db.Column(db.Integer, db.ForeignKey('states.id'), nullable=False)
+    ownership_id = db.Column(db.Integer, db.ForeignKey('ownership.id'), nullable=False)
 
 
 
@@ -49,8 +49,15 @@ class Universities(db.Model):
 
 @app.route('/states')
 def get_all_states():
+  all_states=[]
   states=States.query.order_by('id').all()
-  return jsonify(states.state)
+
+  for state in states:
+    all_states.append({
+      'State_id': state.id,
+      "State": state.state,
+    })
+  return jsonify(all_states)
 
 @app.route('/states/<state_id>')
 def get_universities_list(state_id):
@@ -59,6 +66,29 @@ def get_universities_list(state_id):
   active_state = States.query.get(state_id),
   universities=Universities.query.filter_by(state_id=state_id).order_by('id').all())
 
+@app.route('/ownership/<ownership_id>')
+def get_university_owner(ownership_id):
+  uni=[]
+
+  ownership = Universities.query.filter_by(ownership_id=ownership_id).order_by('id').all()
+  active_owner = Ownership.query.get(ownership_id)
+
+  for university in ownership:
+    uni.append({
+      "id": university.id,
+      "name": university.uni_name,
+      'location': university.location,
+      'ownership': university.ownership_id,
+      'ownership_id': active_owner.owner,
+    })
+
+  # return jsonify({
+  #               'success': True,
+  #               'uni': uni
+  #           })
+
+
+  return render_template('ownership.html', ownership = uni)
 
 
 @app.route('/')
