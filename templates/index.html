@@ -2,21 +2,74 @@
 
 {% block content %}
 
-<section class="hero_section">
+<!-- ================HERO SECTION================== -->
+<section class="hero_section  text-center">
   <div>
-    <img class="hero_img img-fluid" src="../static/images/university_img2.jpg" alt="">
+    <img class="hero_img" src="../static/images/university_img2.jpg" alt="">
   </div>
-  <div class="hero_text">
-    <h1> Find and Locate tertiary Institutions in Nigeria.</h1>
+  <div class=" hero_text mt-md-4 pt-md-4  text-light d-flex justify-content-center align-items-center text-center container-fluid">
+    <h1 class="h1 mt-md-4 pt-md-4"> Find and Locate tertiary Institutions in Nigeria.</h1>
     <h2>Search through 14,080 Schools in Nigeria</h2>
-    <form class="row hero_search_form">
-      <div class="col-auto">
-        <input class="form-control" type="text" placeholder="Searh for schools in a State or particular School" aria-label=".form-control-sm example">
-      </div>
-      <div class="col-auto" style="background-color: white;">
-        <button type="submit" class="btn btn-primary">Search</button>
-      </div>
-    </form>
+
+    <div class="container input-group hero_search_form mt-md-5 p-md-4">
+      <input type="text" class="form-control" placeholder="Searh for schools in a State or particular School">
+      <button class="btn btn-success search-btn" type="button" id="button-addon2">Search</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================SUGGESTED UNIVERSITY SECTION================== -->
+<section class="container-fluid">
+  <div class="container text-center p-5">
+    <h2 class="">Most popular Universities in Nigeria</h2>
+    <div class="row mt-5">
+        <div class="col">
+          <div class="card mb-2">
+            <div class="card-body text-center">
+                <div class="h1 mb-3">
+                    <i class="bi bi-door-open"></i>
+                </div>
+                <h3 class="card-title mb-3">
+                    Private
+                </h3>
+                
+                <a href="#" class="btn btn-success explore-btn">Explore&nbsp<i class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
+            </div>
+        </div>
+        </div>
+        <div class="col">
+          <div class="card mb-2">
+            <div class="card-body text-center">
+                <div class="h1 mb-3">
+                    <i class="bi bi-house"></i>
+                </div>
+                <h3 class="card-title mb-3">
+                    State
+                </h3>
+                
+                <a href="#" class="btn btn-success explore-btn">Explore&nbsp<i class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
+            </div>
+        </div>
+        </div>
+        <div class="col">
+          <div class="card mb-2">
+            <div class="card-body text-center">
+              <div class="h1 mb-3">
+                <i class="bi bi-book"></i>
+              </div>
+              <h3 class="card-title mb-3">
+                Federal
+              </h3>
+          
+              <a href="#" class="btn btn-success explore-btn">Explore&nbsp<i class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
+            </div>
+          
+          </div>
+          
+        </div>
+        </div>
+
+    </div>
   </div>
 </section>
 <div>
@@ -40,6 +93,7 @@
     </ul>
   </div>
 
+  
   <div class="todos-wrapper">
     <h4>{{ active_state.state }}</h4>
 

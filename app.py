@@ -36,6 +36,8 @@ class Universities(db.Model):
     phone_num = db.Column(db.String(), nullable = False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
+
+
 # db.create_all()
 
 @app.route('/states')
@@ -49,6 +51,7 @@ def get_universities_list(state_id):
   states=States.query.order_by('id').all(),
   active_state = States.query.get(state_id),
   universities=Universities.query.filter_by(state_id=state_id).order_by('id').all())
+
 
 
 @app.route('/')

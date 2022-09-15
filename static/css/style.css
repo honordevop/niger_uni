@@ -1,4 +1,16 @@
 
+:root {
+    --primary_color: hsl(136, 100%, 33%);
+}
+
+body {
+    /* background-color: blue; */
+    /* position: absolute; */
+}
+
+.primary_color {
+    background-color: var(--primary_color);
+}
 body, p, div, h1, h2, h3, h4 {
     margin: 0;
     padding: 0;
@@ -6,7 +18,7 @@ body, p, div, h1, h2, h3, h4 {
 
 /* NAV MENU CSS */
 .nav_bar {
-    background-color:  hsl(136, 100%, 33%);
+    background-color:  var(--primary_color);
 }
 
 .nav_container {
@@ -42,7 +54,7 @@ body, p, div, h1, h2, h3, h4 {
 }
 
 .nav_btn {
-    display: none;
+    /* display: none; */
 }
 
 
@@ -87,57 +99,83 @@ body, p, div, h1, h2, h3, h4 {
     width: 100%;
 }
 
+
 .hero_section {
     height: max-content;
-    width: 100vw;
+    /* width: 100vw; */
     background: black;
     overflow: hidden;
 }
 
+
 .hero_img {
-   object-fit: cover;
+    /* position: absolute; */
+   object-fit:fill;
+   /* z-index: 20; */
+   height: 60vh;
    opacity: 0.5;
 }
 
 .hero_text {
     position: absolute;
-    top: 5rem;
-    left: auto;
+    top: 0;
+    left: 0;
     height: 80vh;
-    width: 100vw;
+    /* width: 100vw; */
     /* background-color: yellow; */
-    margin: auto;
-    display: flex;
+    /* margin: auto; */
+    /* display: flex; */
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight:900;
-    color: white;
-    font-size: larger;
+    /* font-weight:900; */
+    /* color: white; */
+    /* font-size: larger; */
     /* letter-spacing: 4; */
 }
 
-.hero_text h2 {
-    position: relative;
+.hero_text h1 {
+    /* position: relative; */
     /* font-size: larger; */
     /* letter-spacing: 4; */
     /* margin-top: auto;
     margin-right: auto; */
+
+    /* color: black; */
+    /* margin-top: 3rem; */
     
 }
 
 .form-control {
-    width: 50rem;
+    /* width: 50rem; */
 }
 
 .hero_search_form {
     /* height: 6rem; */
     background-color: white;
-    padding: 2rem;
-    justify-content: center;
-    align-items: center;
-    margin-top: 4rem;
+    padding: .5rem;
+    /* justify-content: center;
+    align-items: center; */
+    margin-top: .5rem;
 }
 
+
+/* CARD SECTION */
+.card:hover {
+    /* background-color: hsl(136, 100%, 33%); */
+    border: 2px solid var(--primary_color);
+    border-radius: 10px;
+    /* opacity: .1; */
+}
+
+.card-title {
+    color: var(--primary_color);
+}
+
+.explore-btn, .search-btn {
+    background-color: var(--primary_color);
+    color: white;
+    border: none;
+}
 
