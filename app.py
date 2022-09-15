@@ -12,6 +12,12 @@ db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
 
+class Ownership(db.Model):
+  __tablename__ = 'ownership'
+  id = db.Column(db.Integer, primary_key=True)
+  owner = db.Column(db.String(), nullable=False)
+  unis = db.relationship('Universities', backref ='ownership', lazy=True)
+
 class States(db.Model):
     __tablename__ = 'states'
     id = db.Column(db.Integer, primary_key=True)
@@ -35,6 +41,7 @@ class Universities(db.Model):
     contact_email = db.Column(db.String(250), nullable = True)
     phone_num = db.Column(db.String(), nullable = False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    ownership_id = db.Column(db.Integer, db.ForeignKey('states.id'), nullable=False)
 
 
 
