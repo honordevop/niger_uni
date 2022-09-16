@@ -1,3 +1,4 @@
+import sys
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -36,7 +37,6 @@ class Universities(db.Model):
     location = db.Column(db.String(250), nullable = False)
     uni_website = db.Column(db.String(250), nullable = False)
     nuc_accr_courses = db.Column(db.ARRAY(db.String()), nullable=True, default=[])
-    uni_ownership = db.Column(db.String(250), nullable = False)
     state_id = db.Column(db.Integer, db.ForeignKey('states.id'), nullable=False)
     contact_email = db.Column(db.String(250), nullable = True)
     phone_num = db.Column(db.String(), nullable = False)
@@ -58,6 +58,57 @@ def get_all_states():
       "State": state.state,
     })
   return jsonify(all_states)
+
+
+@app.route('/university/create', methods=['POST'])
+def create_uni():
+  error = False
+  body = {}
+  try:
+    uni_name = request.get_json()['uniName']
+    uni_name_abbr = request.get_json()['nameAbbr']
+    vice_chancelor = request.get_json()['viceChancellor']
+    vc_image = request.get_json()['vcImage']
+    uni_image = request.get_json()['uniImage']
+    about_uni = request.get_json()['aboutUni']
+    location = request.get_json()['loCation']
+    uni_website = request.get_json()['uniWebsite']
+    contact_email = request.get_json()['contactEmail']
+    phone_num = request.get_json()['phoneNum']
+    nuc_accr_courses = request.get_json()['nucAccrCourses']
+    ownership_id = request.get_json()['uniOwnership']
+    state_id = request.get_json()['state_id']
+    university = Universities(
+      uni_name=uni_name, 
+      uni_name_abbr=uni_name_abbr,
+      vice_chancelor=vice_chancelor,
+      vc_image=vc_image,
+      uni_image=uni_image,
+      uni_website=uni_website,
+      about_uni=about_uni,
+      location=location,
+      nuc_accr_courses=nuc_accr_courses,
+      state_id=state_id,
+      contact_email=contact_email,
+      phone_num=phone_num,
+      ownership_id=ownership_id, 
+    )
+    db.session.add(university)
+    db.session.commit()
+    body['id'] = university.id
+    body['completed'] = university.uni_name
+    body['description'] = university.location
+  except:
+    error = True
+    db.session.rollback()
+    print(sys.exc_info())
+  finally:
+    db.session.close()
+  if error:
+    abort (400)
+  else:
+    return jsonify(body)
+
 
 @app.route('/states/<state_id>')
 def get_universities_list(state_id):

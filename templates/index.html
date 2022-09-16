@@ -75,11 +75,6 @@
 <div>
   <div class="states-wrapper">
     <h4>SEARCH BY STATE</h4>
-    <form action="/states/create" method="POST" id="list-form">
-      <label for="states">Create List:</label>
-      <input type="text" name="todolist" id="todolist-input" placeholder="A new List" data-id="{{ active_state.id }}" />
-      <button type="submit">Create List</button>
-    </form>
     <!-- 
     <ul id="lists">
       {% for state in states %}
@@ -97,21 +92,51 @@
   <div class="todos-wrapper">
     <h4>{{ active_state.state }}</h4>
 
-    <form id='form'>
-      <input id="state_id" type="hidden" value="{{ active_state.id }}">
+    <form id='create_uni_form'>
 
+      <input id="state_id" type="hidden" value="{{ active_state.id }}">
+      
+      <label for="uni_name"> University Name</label>
       <input type="text" id='uni_name' />
+      
+      <label for="uni_name_abbr"> University Name Abbreviation</label>
+      <input type="text" id='uni_name_abbr' />
+      
+      <label for="vice_chancelor"> University' Vice Chancellor </label>
       <input type="text" id='vice_chancelor' />
+      
+      <label for="vc_image"> Vice Chancellor's Image</label>
       <input type="text" id='vc_image' />
+      
+      <label for="uni_image">University's Image</label>
       <input type="text" id='uni_image' />
+      
+      <label for="about_uni"> About (Brief)</label>
       <input type="text" id='about_uni' />
+      
+      <label for="location">Location Address</label>
       <input type="text" id='location' />
+      
+      <label for="uni_website">Website</label>
       <input type="text" id='uni_website' />
+
+      <label for="contact_email">Email</label>
+      <input type="text" id='contact_email' />
+
+      <label for="phone_num">Phone Number</label>
+      <input type="text" id='phone_num' />
+
+      <label for="nuc_accr_courses"> Accreditted Courses</label>
       <input type="text" id='nuc_accr_courses' />
+      
+      <label for="uni_ownership"> Ownership (Private: 1, State:2, Federal:3</label>
+      <input type="text" id='uni_ownership' />
       <input type="submit" value="Add University" />
+
+      <!-- <input type="submit" value="Create" /> -->
     </form>
     <div class="hidden" id="error"> Something went wrong! </div>
-    <ul id='Universities'>
+    <ul id='universities'>
       {% for university in universities %}
 
       <li class="university_list" id="university_list">
@@ -127,5 +152,78 @@
     </ul>
   </div>
 </div>
+
+
+<script>
+  const uni_name = document.getElementById('uni_name');
+  const uni_name_abbr = document.getElementById('uni_name_abbr');
+  const vice_chancelor = document.getElementById('vice_chancelor');
+  const vc_image = document.getElementById('vc_image');
+  const uni_image = document.getElementById('uni_image');
+  const about_uni = document.getElementById('about_uni');
+  const uni_location = document.getElementById('location');
+  const uni_website = document.getElementById('uni_website');
+  const contact_email = document.getElementById('contact_email');
+  const phone_num = document.getElementById('phone_num');
+  const nuc_accr_courses = document.getElementById('nuc_accr_courses');
+  const uni_ownership = document.getElementById('uni_ownership');
+  const state_id = document.getElementById('state_id');
+  
+    document.getElementById('create_uni_form').onsubmit = function (e) {
+      e.preventDefault();
+      // const desc = descInput.value;
+      const uniName = uni_name.value;
+      const nameAbbr = uni_name_abbr.value;
+      const viceChancellor = vice_chancelor.value;
+      const vcImage = vc_image.value;
+      const uniImage = uni_image.value;
+      const aboutUni = about_uni.value;
+      const loCation = uni_location.value;
+      const uniWebsite = uni_website.value;
+      const contactEmail = contact_email.value;
+      const phoneNum = phone_num.value;
+      const nucAccrCourses = nuc_accr_courses.value;
+      const uniOwnership = uni_ownership.value;
+      // const stateId = state_id.value;
+      
+      // descInput.value = '';
+
+      fetch('/university/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          'uniName': uniName,
+          'nameAbbr': nameAbbr,
+          'viceChancellor': viceChancellor,
+          'vcImage': vcImage,
+          'uniImage': uniImage,
+          'aboutUni': aboutUni,
+          'loCation': loCation,
+          'contactEmail': contactEmail,
+          'uniWebsite': uniWebsite,
+          'phoneNum': phoneNum,
+          'nucAccrCourses': nucAccrCourses,
+          'uniOwnership': uniOwnership,
+          'state_id': document.getElementById('state_id').value
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (jsonResponse) {
+          const liItem = document.createElement('LI');
+          // liItem.innerHTML = jsonResponse['description'];
+          // document.getElementById('universities').appendChild(liItem);
+          // document.getElementById('error').classname = 'hidden';
+          window.location.reload(true);
+        })
+        .catch(function () {
+          document.getElementById('error').className = '';
+        })
+
+    }
+</script>
 
 {% endblock %}
