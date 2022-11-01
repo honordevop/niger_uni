@@ -7,7 +7,8 @@
   <div>
     <img class="hero_img" src="../static/images/university_img2.jpg" alt="">
   </div>
-  <div class=" hero_text mt-md-4 pt-md-4  text-light d-flex justify-content-center align-items-center text-center container-fluid">
+  <div
+    class=" hero_text mt-md-4 pt-md-4  text-light d-flex justify-content-center align-items-center text-center container-fluid">
     <h1 class="h1 mt-md-4 pt-md-4"> Find and Locate tertiary Institutions in Nigeria.</h1>
     <h2>Search through 14,080 Schools in Nigeria</h2>
 
@@ -23,207 +24,57 @@
   <div class="container text-center p-5">
     <h2 class="">Most popular Universities in Nigeria</h2>
     <div class="row mt-5">
-        <div class="col">
-          <div class="card mb-2">
-            <div class="card-body text-center">
-                <div class="h1 mb-3">
-                    <i class="bi bi-door-open"></i>
-                </div>
-                <h3 class="card-title mb-3">
-                    Private
-                </h3>
-                
-                <a href="/ownership/1" class="btn btn-success explore-btn">Explore&nbsp<i class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
+      <div class="col">
+        <div class="card mb-2">
+          <div class="card-body text-center">
+            <div class="h1 mb-3">
+              <i class="bi bi-door-open"></i>
             </div>
-        </div>
-        </div>
-        <div class="col">
-          <div class="card mb-2">
-            <div class="card-body text-center">
-                <div class="h1 mb-3">
-                    <i class="bi bi-house"></i>
-                </div>
-                <h3 class="card-title mb-3">
-                    State
-                </h3>
-                
-                <a href="/ownership/2" class="btn btn-success explore-btn">Explore&nbsp<i class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
-            </div>
-        </div>
-        </div>
-        <div class="col">
-          <div class="card mb-2">
-            <div class="card-body text-center">
-              <div class="h1 mb-3">
-                <i class="bi bi-book"></i>
-              </div>
-              <h3 class="card-title mb-3">
-                Federal
-              </h3>
-          
-              <a href="/ownership/3" class="btn btn-success explore-btn">Explore&nbsp<i class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
-            </div>
-          
+            <h3 class="card-title mb-3">
+              Private
+            </h3>
+
+            <a href="/ownership/1" class="btn btn-success explore-btn">Explore&nbsp<i
+                class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
           </div>
-          
         </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2">
+          <div class="card-body text-center">
+            <div class="h1 mb-3">
+              <i class="bi bi-house"></i>
+            </div>
+            <h3 class="card-title mb-3">
+              State
+            </h3>
+
+            <a href="/ownership/2" class="btn btn-success explore-btn">Explore&nbsp<i
+                class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2">
+          <div class="card-body text-center">
+            <div class="h1 mb-3">
+              <i class="bi bi-book"></i>
+            </div>
+            <h3 class="card-title mb-3">
+              Federal
+            </h3>
+
+            <a href="/ownership/3" class="btn btn-success explore-btn">Explore&nbsp<i
+                class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
+          </div>
+
         </div>
 
+      </div>
     </div>
+
+  </div>
   </div>
 </section>
-<div>
-  <div class="states-wrapper">
-    <h4>SEARCH BY STATE</h4>
-    <!-- 
-    <ul id="lists">
-      {% for state in states %}
-      <li>
-        <input type="checkbox" data-id="{{ state.id }}" class="state-check-completed">
-        <a href="/states/{{ state.id }}"> {{ state.state }} State </a>
-        <button class="delete-state" data-id="{{ state.id }}">&cross;</button>
-      </li>
-      {% endfor %}
-    -->
-    </ul>
-  </div>
-
-  
-  <div class="todos-wrapper">
-    <h4>{{ active_state.state }}</h4>
-
-    <form id='create_uni_form'>
-
-      <input id="state_id" type="hidden" value="{{ active_state.id }}">
-      
-      <label for="uni_name"> University Name</label>
-      <input type="text" id='uni_name' />
-      
-      <label for="uni_name_abbr"> University Name Abbreviation</label>
-      <input type="text" id='uni_name_abbr' />
-      
-      <label for="vice_chancelor"> University' Vice Chancellor </label>
-      <input type="text" id='vice_chancelor' />
-      
-      <label for="vc_image"> Vice Chancellor's Image</label>
-      <input type="text" id='vc_image' />
-      
-      <label for="uni_image">University's Image</label>
-      <input type="text" id='uni_image' />
-      
-      <label for="about_uni"> About (Brief)</label>
-      <input type="text" id='about_uni' />
-      
-      <label for="location">Location Address</label>
-      <input type="text" id='location' />
-      
-      <label for="uni_website">Website</label>
-      <input type="text" id='uni_website' />
-
-      <label for="contact_email">Email</label>
-      <input type="text" id='contact_email' />
-
-      <label for="phone_num">Phone Number</label>
-      <input type="text" id='phone_num' />
-
-      <label for="nuc_accr_courses"> Accreditted Courses</label>
-      <input type="text" id='nuc_accr_courses' />
-      
-      <label for="uni_ownership"> Ownership (Private: 1, State:2, Federal:3</label>
-      <input type="text" id='uni_ownership' />
-      <input type="submit" value="Add University" />
-
-      <!-- <input type="submit" value="Create" /> -->
-    </form>
-    <div class="hidden" id="error"> Something went wrong! </div>
-    <ul id='universities'>
-      {% for university in universities %}
-
-      <li class="university_list" id="university_list">
-
-        <input class="check-completed" data-id="{{ university.id }}" type="checkbox">
-        {{ university.uni_name }}
-        <p> {{ university.location }} </p>
-        <button type="submit" class="delete-button" id="delete-todo" data-id="{{ university.id }}">&cross;</button>
-
-      </li>
-
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-
-
-<script>
-  const uni_name = document.getElementById('uni_name');
-  const uni_name_abbr = document.getElementById('uni_name_abbr');
-  const vice_chancelor = document.getElementById('vice_chancelor');
-  const vc_image = document.getElementById('vc_image');
-  const uni_image = document.getElementById('uni_image');
-  const about_uni = document.getElementById('about_uni');
-  const uni_location = document.getElementById('location');
-  const uni_website = document.getElementById('uni_website');
-  const contact_email = document.getElementById('contact_email');
-  const phone_num = document.getElementById('phone_num');
-  const nuc_accr_courses = document.getElementById('nuc_accr_courses');
-  const uni_ownership = document.getElementById('uni_ownership');
-  const state_id = document.getElementById('state_id');
-  
-    document.getElementById('create_uni_form').onsubmit = function (e) {
-      e.preventDefault();
-      // const desc = descInput.value;
-      const uniName = uni_name.value;
-      const nameAbbr = uni_name_abbr.value;
-      const viceChancellor = vice_chancelor.value;
-      const vcImage = vc_image.value;
-      const uniImage = uni_image.value;
-      const aboutUni = about_uni.value;
-      const loCation = uni_location.value;
-      const uniWebsite = uni_website.value;
-      const contactEmail = contact_email.value;
-      const phoneNum = phone_num.value;
-      const nucAccrCourses = nuc_accr_courses.value;
-      const uniOwnership = uni_ownership.value;
-      // const stateId = state_id.value;
-      
-      // descInput.value = '';
-
-      fetch('/university/create', {
-        method: 'POST',
-        body: JSON.stringify({
-          'uniName': uniName,
-          'nameAbbr': nameAbbr,
-          'viceChancellor': viceChancellor,
-          'vcImage': vcImage,
-          'uniImage': uniImage,
-          'aboutUni': aboutUni,
-          'loCation': loCation,
-          'contactEmail': contactEmail,
-          'uniWebsite': uniWebsite,
-          'phoneNum': phoneNum,
-          'nucAccrCourses': nucAccrCourses,
-          'uniOwnership': uniOwnership,
-          'state_id': document.getElementById('state_id').value
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (jsonResponse) {
-          const liItem = document.createElement('LI');
-          // liItem.innerHTML = jsonResponse['description'];
-          // document.getElementById('universities').appendChild(liItem);
-          // document.getElementById('error').classname = 'hidden';
-          window.location.reload(true);
-        })
-        .catch(function () {
-          document.getElementById('error').className = '';
-        })
-
-    }
-</script>
 
 {% endblock %}

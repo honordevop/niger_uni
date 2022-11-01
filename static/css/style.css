@@ -4,7 +4,8 @@
 }
 
 body {
-    /* background-color: blue; */
+    /* background-color: rgba(223, 218, 218, 0.427); */
+    color: #657279;
     /* position: absolute; */
 }
 
@@ -179,6 +180,22 @@ body, p, div, h1, h2, h3, h4 {
     border: none;
 }
 
-.form input {
-    display: block;
+
+/* Create University Section CSS */
+
+/* .create_uni_form input, #uni_name {
+    margin-bottom: rem;
+} */
+
+.hidden {
+    display: none;
+}
+
+li {
+    list-style: none;
+}
+
+.states-wrapper {
+    height: 90vh;
+    /* overflow: scroll; */
 }
