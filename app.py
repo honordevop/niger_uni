@@ -110,12 +110,15 @@ def create_uni():
     return jsonify(body)
 
 
-@app.route('/states/<state_id>')
+@app.route('/states/<state_id>', defaults={'state_id': 1})
 def get_universities_list(state_id):
+  print(state_id)
   return render_template('index.html', 
   states=States.query.order_by('id').all(),
   active_state = States.query.get(state_id),
+  
   universities=Universities.query.filter_by(state_id=state_id).order_by('id').all())
+  
 
 @app.route('/ownership/<ownership_id>')
 def get_university_owner(ownership_id):
@@ -138,13 +141,26 @@ def get_university_owner(ownership_id):
   #               'uni': uni
   #           })
 
-
   return render_template('ownership.html', ownership = uni)
+  
+
+@app.route('/admin/', defaults={'state_id': 1})
+@app.route('/admin/<state_id>')
+def admin_page(state_id):
+  return render_template('adminHome.html', 
+  states=States.query.order_by('id').all(),
+  active_state = States.query.get(state_id),
+  universities=Universities.query.filter_by(state_id=state_id).order_by('id').all())
+
+
+@app.route('/footer')
+def footer():
+  return render_template('footer.html')
 
 
 @app.route('/')
 def index():
-  return redirect(url_for('get_universities_list', state_id=1))
+  return redirect(url_for('get_universities_list'))
 
 
 #always include this at the bottom of your code

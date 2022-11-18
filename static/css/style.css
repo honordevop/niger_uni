@@ -3,6 +3,10 @@
     --primary_color: hsl(136, 100%, 33%);
 }
 
+.col{
+    margin-bottom: 10px;
+}
+
 body {
     /* background-color: rgba(223, 218, 218, 0.427); */
     color: #657279;
@@ -54,10 +58,6 @@ body, p, div, h1, h2, h3, h4 {
 
 }
 
-.nav_btn {
-    /* display: none; */
-}
-
 
 .login_icon {
     display: block;
@@ -101,7 +101,7 @@ body, p, div, h1, h2, h3, h4 {
 }
 
 
-.hero_section {
+.hero_section, .category {
     height: max-content;
     /* width: 100vw; */
     background: black;
@@ -136,21 +136,7 @@ body, p, div, h1, h2, h3, h4 {
     /* letter-spacing: 4; */
 }
 
-.hero_text h1 {
-    /* position: relative; */
-    /* font-size: larger; */
-    /* letter-spacing: 4; */
-    /* margin-top: auto;
-    margin-right: auto; */
 
-    /* color: black; */
-    /* margin-top: 3rem; */
-    
-}
-
-.form-control {
-    /* width: 50rem; */
-}
 
 .hero_search_form {
     /* height: 6rem; */
@@ -163,7 +149,11 @@ body, p, div, h1, h2, h3, h4 {
 
 
 /* CARD SECTION */
-.card:hover {
+.card{
+    cursor: pointer;
+}
+
+.card_hover:hover {
     /* background-color: hsl(136, 100%, 33%); */
     border: 2px solid var(--primary_color);
     border-radius: 10px;
@@ -198,4 +188,88 @@ li {
 .states-wrapper {
     height: 90vh;
     /* overflow: scroll; */
+}
+
+/* Category Section */
+.category:hover{
+    cursor: pointer;
+}
+.categorySection{
+    position: relative;
+    color: white;
+    font-weight: bolder;
+}
+
+.categories{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.categoryText{
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid blue;
+    margin: auto;
+}
+
+.categoryImg{
+    opacity: 0.6;
+    /* border: solid yellow 2px; */
+    /* width: 15rem; */
+    /*height: 15rem;
+    object-fit: cover; */
+}
+
+.col_1 {
+    position: relative;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    /* width: max-content;
+    height: max-content; */
+    
+    /* width: 20rem;
+    height: 15rem; */
+}
+
+/* newsletter */
+.newsletter{
+    background-color: var(--primary_color);
+}
+
+/* footer */
+.footer_text{
+    display: flex;
+    flex-direction: column;
+    color: var(--primary_color);
+    gap: 10px;
+}
+.footer_link {
+    list-style: none;
+    width: max-content;
+    color: var(--primary_color);
+    /* font-weight: bold; */
+}
+.footer_link li:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.phone{
+    text-decoration: none;
+    color: var(--primary_color);
+    font-weight: bold;
+}
+
+.atiniger_footer_logo{
+    height: max-content;
+    width: max-content;
+}
+
+.bi-arrow-up-circle{
+    color: white;
 }

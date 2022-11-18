@@ -20,7 +20,7 @@
 </section>
 
 <!-- ================SUGGESTED UNIVERSITY SECTION================== -->
-<section class="container-fluid">
+<!-- <section class="container-fluid">
   <div class="container text-center p-5">
     <h2 class="">Most popular Universities in Nigeria</h2>
     <div class="row mt-5">
@@ -75,7 +75,7 @@
 
   </div>
   </div>
-</section>
+</section> -->
 
 
 <section class="container">
@@ -85,11 +85,11 @@
     <div class="states-wrapper col-4">
       <h4>Select the State of Choice</h4>
       <!-- <h3>Selected State: {{ active_state.state }}</h3> -->
-      <select name="" id="stateList" onchange="window.location.href=this.value;">
+      <select name="" id="stateList" onchange="window.location.href=this.value;" id="stateId">
         <!-- <ul id="lists"> -->
         {% for state in states %}
         <!-- <a href="/states/{{ state.id }}" class="btn mt-3 btn-success text-nowrap"> -->
-        <option value="/states/{{ state.id }}" class="">
+        <option value="/admin/{{ state.id }}" class="" >
           <!-- <input type="checkbox" data-id="{{ state.id }}" class="state-check-completed"> -->
           {{ state.state }}
           <!-- <button class="delete-state" data-id="{{ state.id }}">&cross;</button> -->
@@ -141,7 +141,7 @@
         <label for="nuc_accr_courses" class="form-label"> Accreditted Courses</label>
         <input type="text" id='nuc_accr_courses' class="form-control mb-3" />
 
-        <label for="uni_ownership" class="form-label"> Ownership (Private: 1, State:2, Federal:3</label>
+        <label for="uni_ownership" class="form-label"> Ownership (Private: 1, State:2, Federal:3)</label>
         <input type="text" id='uni_ownership' class="form-control mb-3" />
         <input class="btn btn-success center mt-3" type="submit" value="Add University" />
 
@@ -172,12 +172,11 @@
 
 <script>
 
-$('#stateList').change(function(event){
-        var selectedcategory = $(this).children("option:selected").val();
-        sessionStorage.setItem("itemName",selectedcategory);
-});
-
-$('select').find('option[value='+sessionStorage.getItem('itemName')+']').attr('selected','selected');
+    // const stateId = document.getElementById('stateId');
+    // stateId.addEventListener("click", ()=>{
+    //     active_state = stateId.value
+    //     console.log("Hello world")
+    // });
 
   const uni_name = document.getElementById('uni_name');
   const uni_name_abbr = document.getElementById('uni_name_abbr');

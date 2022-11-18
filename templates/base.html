@@ -61,6 +61,7 @@
         
     </nav>
 
+
     {% block content %} {% endblock %}
 
 
@@ -68,8 +69,13 @@
     <!-- <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script> -->
 
     <!-- Main JS -->
-    <script src=""></script>
 
+    {% include "newsletter.html" %}
+
+    {% include "footer.html" %}
+
+
+    <script src=""></script>
 </body>
 
 </html>
