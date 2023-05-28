@@ -1,0 +1,73 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container d-flex-column wrapper">
+    <div>
+        <h3 class="mt-4 mb-4"> {{uni.name}}-{{uni.uni_name_abbr}}</h3>
+    </div>
+
+
+        <div class="slide-container">
+            {% if uni.uni_images %}
+            <i id="slide-left" class="arrow bi bi-arrow-left-circle-fill h3"></i>
+            <!-- <img id="slide-left" class="arrow" src="images/arrow-left.png"> -->
+            <section class="sliderContainer" id="slider">
+                {% for x in uni.uni_images %}
+                <div class="thumbnail">
+                    <img class="uniImages" width="300" height="300" src={{ x }} alt="">
+                </div>
+                {% endfor %}
+            </section>
+            <i id="slide-right" class="arrow bi bi-arrow-right-circle-fill h3"></i>
+            <!-- <img id="slide-right" class="arrow" src="images/arrow-right.png"> -->
+            {% else %}
+            <img class="uniImages" width="300" height="300" src="{{ uni.uni_image }}" alt="">
+            {% endif %}
+        </div>
+
+    
+
+    <div class="d-md-flex mt-4 align-content-center ubi_about_container">
+        <p> {{uni.about}} </p>
+        <div class="vcNameSection text-center">
+            {% if uni.vc_image %}
+                <img class="uniImg" src={{ uni.vc_image }} alt={{uni.vice_chancelor}}>
+            {% else %}
+                <img class="whatsapp_svg" src="../static/images/Coat_of_arms_of_Nigeria.svg.png" alt="nigeria)coat_of_arms">
+            {% endif %}
+            <h5> {{uni.vice_chancelor}} </h5>
+            <p class="vcName">Vice Chancellor</p>
+        </div>
+    </div>
+    <div class="d-flex mt-5">
+        <div>
+            
+            <p class="uniLocation"><span>Location: </span> {{ uni.location }}</p>
+            
+            <p class="uniEmail">
+                <span>Email: </span>
+                {{ uni.contact_email }}
+            </p>
+            <p>Ownership: {{uni.owner}}</p>
+            
+            {% if uni.phone_num %}
+            <p class="uniPhone"> <span>Phone: </span> +234{{uni.phone_num}} </p>
+            {% else %}
+            <span>Phone: </span> N/A </p>
+            {% endif %}
+            <button class="visitbtn"><a href="{{uni.uni_website}}" target="_blank">Visit {{uni.uni_name_abbr}}</a></button>
+        </div>
+        <div>
+            
+    
+        </div>
+    </div>
+    
+</div>
+
+<script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+
+
+{% endblock %}

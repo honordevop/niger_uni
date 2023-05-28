@@ -1,0 +1,19 @@
+Modibbo Adama University of Technology (Website not working at all)
+
+Polac no VC image Adresses
+
+NDA founding year on NUC (1985)is not the same on the websites(1964)
+
+When I designed my data model I made some column nullable=false such asinstitution's contact phone number and email. But most nigeria institution doesn't even have those contact option on the website. I have to remodify the database schema to accomodate the reality I was slapped.
+
+The Commandant of Nigeria Police accademy has been changed to Abdurrahman Ahmad but Professor Zana Mohammed Ibrahim still remains on NUC website
+
+
+Federal University = 49 (2-50)
+State University = 59 (51-109)
+Private University = 111 (110-220)
+
+
+
+
+Sir, as regards the internet system, those guys will provide us with a wireless device (just like the wireless router we have already) but not as powerful a

@@ -1,51 +1,10 @@
 import sys
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from config import app
+from model import Universities,Ownership,States
 from datetime import datetime
+from helperFxn import get_university_by_ownership, search_institution_by_abbr, fetchAllUniversities, fetch_single_university, institutionListByState
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:08164462713@localhost:5432/nigeruni'
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-migrate = Migrate(app, db)
-
-class Ownership(db.Model):
-  __tablename__ = 'ownership'
-  id = db.Column(db.Integer, primary_key=True)
-  owner = db.Column(db.String(), nullable=False)
-  unis = db.relationship('Universities', backref ='ownership', lazy=True)
-
-class States(db.Model):
-    __tablename__ = 'states'
-    id = db.Column(db.Integer, primary_key=True)
-    state = db.Column(db.String(), nullable=False)
-    unis = db.relationship('Universities', backref ='state', lazy=True)
-
-class Universities(db.Model):
-    __tablename__ = 'universities'
-    id = db.Column(db.Integer, primary_key=True)
-    uni_name = db.Column(db.String(250), nullable = False)
-    uni_name_abbr = db.Column(db.String(250), nullable = False)
-    vice_chancelor = db.Column(db.String(250), nullable = False)
-    vc_image = db.Column(db.String(250), nullable = False)
-    uni_image = db.Column(db.String(250), nullable = False)
-    about_uni = db.Column(db.String(1000), nullable = False)
-    location = db.Column(db.String(250), nullable = False)
-    uni_website = db.Column(db.String(250), nullable = False)
-    nuc_accr_courses = db.Column(db.ARRAY(db.String()), nullable=True, default=[])
-    state_id = db.Column(db.Integer, db.ForeignKey('states.id'), nullable=False)
-    contact_email = db.Column(db.String(250), nullable = True)
-    phone_num = db.Column(db.String(), nullable = False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    ownership_id = db.Column(db.Integer, db.ForeignKey('ownership.id'), nullable=False)
-
-
-
-# db.create_all()
 
 @app.route('/states')
 def get_all_states():
@@ -110,39 +69,82 @@ def create_uni():
     return jsonify(body)
 
 
-@app.route('/states/<state_id>', defaults={'state_id': 1})
-def get_universities_list(state_id):
-  print(state_id)
-  return render_template('index.html', 
-  states=States.query.order_by('id').all(),
-  active_state = States.query.get(state_id),
+"""@app.route('/states/<id>')
+def get_state_university_list(id):
+  universities = get_universities_list_by_state(id)
+  return render_template('institutions.html', data = universities)"""
+
+@app.route('/ownership/private')
+def privateUniversities():
+  universities = get_university_by_ownership(1, Universities)
+  return render_template('institutions.html', data = universities)
+
+@app.route('/ownership/state')
+def stateUniversities():
+  universities = get_university_by_ownership(2, Universities)
+  return render_template('institutions.html', data = universities) 
+
+@app.route('/ownership/federal')
+def federalUniversities():
+  universities = get_university_by_ownership(3, Universities)
+  return render_template('institutions.html', data = universities)
+
+
+#   # return jsonify({
+#   #               'success': True,
+#   #               'uni': uni
+#   #           })
+
+#   return render_template('ownership.html', ownership = uni)
+
+
+
+
+@app.route('/institutions/search', methods=['GET'])
+def search_university_by_abbr():
+  universities = search_institution_by_abbr()
+  if universities:
+    return render_template('institutions.html', data = universities)
+  else:
+    return render_template('notFound.html', error='Not found')
+
+@app.route('/universities/')
+def fetch_all_universities():
+  alluniversities = fetchAllUniversities()
   
-  universities=Universities.query.filter_by(state_id=state_id).order_by('id').all())
-  
+  return render_template('institutions.html', data = alluniversities)
 
-@app.route('/ownership/<ownership_id>')
-def get_university_owner(ownership_id):
-  uni=[]
+@app.route('/university/search')
+def search_a_university():
+  # print('Id is here:'+ id)
+  # university = fetch_single_university(id)
+  universities = search_institution_by_abbr()
+  print(universities)
+  if universities:
+    return render_template('institutions.html', data = universities)
+  else:
+    return render_template('notFound.html', error='Not found')
+  # return university
+  # return render_template('institution.html', uni = university)
 
-  ownership = Universities.query.filter_by(ownership_id=ownership_id).order_by('id').all()
-  active_owner = Ownership.query.get(ownership_id)
+# fetch single University
+@app.route('/university/<uni_name>')
+def fetch_a_university_details(uni_name):
+  university = fetch_single_university(uni_name)
+  # return jsonify(university)
+  if (university):
+    return render_template('institution.html', uni=university[0])
+  else:
+    return render_template('notFound.html', error='Not found')
 
-  for university in ownership:
-    uni.append({
-      "id": university.id,
-      "name": university.uni_name,
-      'location': university.location,
-      'ownership': university.ownership_id,
-      'ownership_id': active_owner.owner,
-    })
 
-  # return jsonify({
-  #               'success': True,
-  #               'uni': uni
-  #           })
-
-  return render_template('ownership.html', ownership = uni)
-  
+@app.route('/universities/search', methods=['GET'])
+def search_universities_by_state():
+  result = institutionListByState()
+  if result:
+    return render_template('institutions.html', data = result)
+  else:
+    return render_template('notFound.html', error='Not found')
 
 @app.route('/admin/', defaults={'state_id': 1})
 @app.route('/admin/<state_id>')
@@ -160,8 +162,40 @@ def footer():
 
 @app.route('/')
 def index():
-  return redirect(url_for('get_universities_list'))
+  return render_template('index.html')
+  # return redirect(url_for('get_universities_list'))
 
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 404,
+        "message": "resource not found ooo"
+    }), 404
+
+def unprocessable(error):
+  return jsonify({
+      "success": False,
+      "error": 422,
+      "message": "unprocessable"
+  }), 422
+
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "success": False,
+        "error": 400,
+        "message": "bad request"
+    }), 400
+
+
+@app.errorhandler(405)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 405,
+        "message": "method not allowed"
+    }), 405
 
 #always include this at the bottom of your code
 if __name__ == '__main__':

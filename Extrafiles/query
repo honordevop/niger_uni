@@ -6,4 +6,21 @@ INSERT INTO universities (uni_name, vice_chancelor, vc_image, uni_image, about_u
 								 'ABSU', 'STATE', 'ics@abiastateuniversity.edu.ng', '07066166857'
 								 );
 								 
-SELECT * FROM universities;
+SELECT * FROM states;
+
+DELETE FROM universities WHERE id = 6;
+UPDATE universities
+SET state_id = ARRAY ['https://lh3.googleusercontent.com/p/AF1QipPZvB2vytDjQMD3psodOGemj_nghVrn0_EX_4i1=s680-w680-h510', 
+						'https://lh3.googleusercontent.com/p/AF1QipPT3gOKQOqPNETvY1QOo_s1Mx3XUnqoPFj_KNAk=s680-w680-h510',
+						'https://lh3.googleusercontent.com/p/AF1QipOp1YFKJ57OA5GSVbkoJETtUy_z1_Rp39xdOTbd=s680-w680-h510', 
+					   'https://lh3.googleusercontent.com/p/AF1QipNkkaizJU70tKoOuzPmlAQMzjKc9oMBKBDjSaA6=s680-w680-h510', 
+					    'https://lh3.googleusercontent.com/p/AF1QipNjKiKewvfZMLsIQx7D-h-bA8DHOlVdKctsvDlg=s680-w680-h510', 
+					   'https://lh3.googleusercontent.com/p/AF1QipOBFRJfmE5f3UMGvJC0Ac2kaZrgnB62NuUI4QBS=s680-w680-h510']
+WHERE id = 6;
+
+UPDATE universities
+SET ownership_id = '2'
+WHERE id = 1;
+
+SELECT * from universities;
+DELETE FROM universities WHERE id = 1;

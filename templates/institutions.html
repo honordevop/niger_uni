@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for university in data %}
+
+<div class=" container uniItem mt-5">
+  <input id="uniId" type="hidden" value="{{ university.id }}">
+  <img class="uniImg" src="{{ university.uni_image }}" alt="{{ university.name }}">
+
+  <div class="uniDesc">
+    <h1 class="uniName"> {{ university.name }}, {{ university.uni_name_abbr }} </h1>
+    <span class="uniAbout">{{ '%.300s'  %university.about }}...</span>
+    <span>
+    <span class="uniLocation">{{ university.location }}</span> 
+    <span class="fw-bold">Owned by: {{ university.owner }}</span>
+  </span>
+    <span class="uniEmail">
+      <span class="uniPhone">Contact Email: {{ university.contact_email }}</span>
+    </span>
+    <span class="uniPhone">Phone: +234{{university.phone_num}} </span>
+  </div>
+  <div class="readMore">
+    <div class="readMoreTexts">
+      
+        <button class="readMoreBtn" data-id="{{ university.id }}">
+          <a href="/university/{{ university.name }}">Read more </a>
+        </button>
+
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+<!-- <ul id='Universities'>
+    {% for university in ownership %}
+
+    <li class="university_list" id="university_list">
+
+      <input class="check-completed" data-id="{{ university.id }}" type="checkbox">
+      {{ university.name }}
+      <p> {{ university.location }} </p>
+
+      <p> {{ university.about }} </p>
+      
+      <button type="submit" class="delete-button" id="delete-todo" data-id="{{ university.id }}">&cross;</button>
+
+    </li>
+
+    {% endfor %}
+</ul> -->
+
+{% endblock %}
+
+<script>
+
+</script>

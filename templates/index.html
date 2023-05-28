@@ -3,23 +3,22 @@
 {% block content %}
 
 <!-- ================HERO SECTION================== -->
-<section class="hero_section  text-center">
-  <div>
-    <img class="hero_img" src="../static/images/university_img2.jpg" alt="">
-  </div>
-  <div
-    class=" hero_text mt-md-4 pt-md-4  text-light d-flex justify-content-center align-items-center text-center container-fluid">
-    <h1 class="h1 mt-md-4 pt-md-4"> Find and Locate tertiary Institutions in Nigeria.</h1>
-    <h2>Search through 14,080 Schools in Nigeria</h2>
+<div class="hero_section  text-center" style="background:linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%), url('../static/images/university_img2.jpg'); background-size: cover; background-repeat: no-repeat;">
 
-    <div class="container input-group hero_search_form mt-md-5 p-md-4">
-      <input type="text" class="form-control" placeholder="Searh for schools in a State or particular School">
-      <button class="btn btn-success search-btn" type="button" id="button-addon2">Search</button>
-    </div>
+  <div
+    class=" hero_text pt-md-4  text-light justify-content-center align-items-center text-center container-fluid">
+    <h2 class="h1 mt-md-4 pt-md-4"> Find and Locate tertiary Institutions in Nigeria.</h2>
+    <h3>Search through 14,080 Schools in Nigeria</h3>
+
   </div>
-</section>
+</div>
+<form class="container input-group hero_search_form p-md-4" method="get" action="/institutions/search">
+  <input name="name" type="text" class="form-control" placeholder="Searh for schools in a State or particular School">
+  <button class="btn btn-success search-btn" type="submit" value="search" id="button-addon2a">Search</button>
+</form>
 
 <!-- ================SUGGESTED UNIVERSITY SECTION================== -->
+<!-- <section class="content"> -->
 <section class="container-fluid">
   <div class="container text-center p-5">
     <h2 class="">Most popular Universities in Nigeria</h2>
@@ -34,7 +33,7 @@
               Private
             </h3>
 
-            <a href="/ownership/1" class="btn btn-success explore-btn">Explore&nbsp<i
+            <a href="/ownership/private" class="btn btn-success explore-btn">Explore&nbsp<i
                 class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
           </div>
         </div>
@@ -49,7 +48,7 @@
               State
             </h3>
 
-            <a href="/ownership/2" class="btn btn-success explore-btn">Explore&nbsp<i
+            <a href="/ownership/state" class="btn btn-success explore-btn">Explore&nbsp<i
                 class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
           </div>
         </div>
@@ -64,7 +63,7 @@
               Federal
             </h3>
 
-            <a href="/ownership/3" class="btn btn-success explore-btn">Explore&nbsp<i
+            <a href="/ownership/federal" class="btn btn-success explore-btn">Explore&nbsp<i
                 class="bi bi-arrow-right-circle d-none d-sm-inline"></i></a>
           </div>
 
@@ -78,10 +77,11 @@
 </section>
 
 <!-- ================Institution Category SECTION================== -->
-<section class="container text-center p-5">
-  <div class="row">
+<section class="container suggestedContainer text-center p-4">
+  <div class="row suggestedContainer">
     <h2 class="mb-5">Search institutions by Category</h2>
     <div class="col">
+      <a href="/universities/">
       <div class="card bg-dark text-white category">
         <img src="../static/images/uni.jpg" class="card-img categoryImg" alt="...">
         <div class="card-img-overlay d-flex align-items-center  justify-content-center">
@@ -92,9 +92,11 @@
           </div>
         </div>
       </div>
+    </a>
     </div>
     
       <div class="col">
+        <a href="/universities/">
         <div class="card bg-dark text-white category">
           <img class="categoryImg" src="../static/images/poly.jpg" class="card-img" alt="...">
           <div class="card-img-overlay d-flex align-items-center  justify-content-center">
@@ -105,6 +107,7 @@
             </div>
           </div>
         </div>
+      </a>
       </div>
   
       <div class="col">
@@ -123,6 +126,190 @@
   </div>
 </section>
 
+<!-- ======================Suggested Universities in Nigeria====================== -->
+<section class="container-fluid">
+  <div class=" container text-center p-1">
+    <h3 class="">Suggested Universities in Nigeria</h3>
+    <!-- Suggested Row 1 -->
+    <div class="row mt-5 suge">
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=lagos">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Lagos State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              09
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=kaduna">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Kaduna State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              55
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=akwa">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Akwa-Ibom</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              12
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=oyo">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Oyo State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              22
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=rivers">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Rivers State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              30
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=kano">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Kano State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              02
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Suggested Row 2 -->
+    <div class="row mt-5 suge">
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=ogun">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Ogun State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              09
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=bauchi">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Bauchi State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              55
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=delta">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Delta State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              12
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=ekiti">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Ekiti State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              22
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=taraba">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Taraba State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              30
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-2 card_hover colNewSize">
+          <div class="card-body text-center">
+            <a href="/universities/search?state=sokoto">
+            <div class="h5 mb-3">
+              <small>Universities in <br> Sokoto State</small>
+            </div>
+            <!-- <p class="uni-count mb-3">
+              02
+            </p> -->
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+</section>
 
 <!-- ================Top Choice SECTION================== -->
 
@@ -131,6 +318,7 @@
     <h2 class="mb-5 text-center">Top Choice Universities</h2>
     <div class="row justify-items-center align-content-center">
       <div class="col">
+        <a href="/university/search?name=University of ibadan">
         <div class="card" >
           <img src="../static/images/UniIbadan.jpeg" class="card-img-top" alt="...">
           <div class="card-body">
@@ -139,6 +327,7 @@
             <p class="">Oyo State</p>
           </div>
         </div>
+      </a>
       </div>
 
       <div class="col">
@@ -153,6 +342,7 @@
       </div>
 
       <div class="col">
+        <a href="/university/search?name=Convenant University">
         <div class="card" >
           <img src="../static/images/covenant-aerial-view.jpg" class="card-img-top" alt="...">
           <div class="card-body">
@@ -161,6 +351,7 @@
             <p class="">Ogun State</p>
           </div>
         </div>
+      </a>
       </div>
 
       <div class="col">
@@ -228,6 +419,7 @@
   </div>
 
 </section>
+<!-- </section> -->
 
 
 

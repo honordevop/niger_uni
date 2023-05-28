@@ -1,0 +1,30 @@
+API Endpoints
+
+
+Get All States name and ID
+http://127.0.0.1:5000/states
+
+Get All Private Universities
+http://127.0.0.1:5000/ownership/private
+
+Get All State Universities
+http://127.0.0.1:5000/ownership/state
+
+Get All Federal Universities
+http://127.0.0.1:5000/ownership/federal
+
+Search for All Institutions By it's Abbrevation/Name
+http://127.0.0.1:5000/institutions/search?name=futo
+
+Get/Search for all University in a State
+http://127.0.0.1:5000/universities/search?state=delta
+
+Search for University (Only) by it's Name/Abbrevation
+http://127.0.0.1:5000/university/search?name=University%20of%20ibadan
+
+Get A University details page
+http://127.0.0.1:5000/university/Bayero%20University
+
+
+
+
