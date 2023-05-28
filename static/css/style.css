@@ -273,6 +273,7 @@ li {
 /* newsletter */
 .newsletter {
     background-color: var(--primary_color);
+    margin-top: 30px;
 }
 
 /* footer */
@@ -427,7 +428,7 @@ small {
     .news-input{
         /* width: 50%; */
     }
-    .suge{
+    .suggested{
         display: flex !important;
         flex-wrap: wrap;
         gap: 5px;
