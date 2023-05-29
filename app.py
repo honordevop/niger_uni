@@ -139,11 +139,11 @@ def federalUniversities():
 
 
 
-@app.route('/institutions/search', methods=['GET'])
+@app.route('/institutions/search/', methods=['GET'])
 def search_university_by_abbr():
   universities = search_institution_by_abbr()
   if universities:
-    return render_template('institutions.html', data = universities)
+    return render_template('searchResult.html', data = universities)
   else:
     return render_template('notFound.html', error='Not found')
 
@@ -158,7 +158,7 @@ def search_a_university():
   universities = search_institution_by_abbr()
   print(universities)
   if universities:
-    return render_template('institutions.html', data = universities)
+    return render_template('searchResult.html', data = universities)
   else:
     return render_template('notFound.html', error='Not found')
   # return university
