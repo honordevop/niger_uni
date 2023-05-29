@@ -98,20 +98,10 @@ def federalUniversities():
   universities = get_university_by_ownership(3, Universities)
   data = universities[0:20]
   return jsonify({
-    'status_code': 200,
+    'count': len(data),
+    'status': 200,
     'data': data,
-    'total': len(data)
   }), 200
-  # return render_template('institutions.html', data = universities)
-
-
-#   # return jsonify({
-#   #               'success': True,
-#   #               'uni': uni
-#   #           })
-
-#   return render_template('ownership.html', ownership = uni)
-
 
 
 
@@ -119,9 +109,14 @@ def federalUniversities():
 def search_university_by_abbr():
   universities = search_institution_by_abbr()
   if universities:
-    return render_template('institutions.html', data = universities)
+    data = universities[0:20]
+    return jsonify({
+      'status_code': 200,
+      'data': data,
+      'total': len(data)
+    }), 200
   else:
-    return render_template('notFound.html', error='Not found')
+    return 404
 
 @app.route('/universities/')
 def fetch_all_universities():
