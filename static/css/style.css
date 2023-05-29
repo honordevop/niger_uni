@@ -285,7 +285,7 @@ li {
 }
 
 .footer_link {
-    list-style: none;
+    list-style: disc !important;
     width: max-content;
     color: var(--primary_color);
     /* font-weight: bold; */

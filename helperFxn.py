@@ -78,11 +78,11 @@ def search_institution_by_abbr():
   uni_abbre_result = Universities.query.filter(Universities.uni_name_abbr.ilike("%" + abbre + "%")).all()
   uni_name_result = Universities.query.filter(Universities.uni_name.ilike("%" + abbre + "%")).all()
 
-  if (uni_abbre_result):
-    universities = uni_abbre_result
-  # if (universities2):
-  elif (uni_name_result):
+  if (uni_name_result):
     universities = uni_name_result
+  # if (universities2):
+  elif (uni_abbre_result):
+    universities = uni_abbre_result
   else:
     return
   try:

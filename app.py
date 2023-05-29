@@ -177,31 +177,12 @@ def fetch_a_university_details(uni_name):
 
 @app.route('/universities/search/', methods=['GET'])
 def search_universities_by_state():
-  statename = request.args.get('state')
-  session["statename"] = statename
-  if not statename:
-      statename = session.get("statename")
-
-      
-      
-  if statename:
-    stateSearched = States.query.filter(States.state.ilike("%" + statename + "%")).first()
-  # result = institutionListByState()
-    if stateSearched:
-      universities = Universities.query.filter_by(state_id=stateSearched.id)
+  result = institutionListByState()
+  if result:
+    return render_template('searchResult.html', data = result)
   else:
     return render_template('notFound.html', error='Not found')
-  
-  page = request.args.get('page')
 
-  if page and page.isdigit():
-    page = int(page)
-  else:
-    page = 1
-
-  pages = universities.paginate(page, per_page=5)
-
-  return render_template('institutions.html', data = universities, pages=pages, route="/universities/search/")
 
 @app.route('/admin/', defaults={'state_id': 1})
 @app.route('/admin/<state_id>')
