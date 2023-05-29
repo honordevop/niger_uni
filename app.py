@@ -72,7 +72,7 @@ def create_uni():
     return jsonify(body)
 
 
-@app.route('/ownership/private')
+@app.route('/ownership/private/')
 def privateUniversities():
   universities = get_university_by_ownership(1, Universities)
   data = universities[0:20]
@@ -82,14 +82,14 @@ def privateUniversities():
     'data': data,
   }), 200
 
-@app.route('/ownership/state')
+@app.route('/ownership/state/')
 def stateUniversities():
   universities = get_university_by_ownership(2, Universities)
   data = universities[0:20]
   return jsonify({
-    'status_code': 200,
+    'count': len(data),
+    'status': 200,
     'data': data,
-    'total': len(data)
   }), 200
   
 
