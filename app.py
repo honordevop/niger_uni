@@ -6,7 +6,7 @@ from datetime import datetime
 from helperFxn import get_university_by_ownership, search_institution_by_abbr, fetchAllUniversities, fetch_single_university, institutionListByState
 
 
-@app.route('/states')
+@app.route('/states/')
 def get_all_states():
   all_states=[]
   states=States.query.order_by('id').all()
@@ -16,7 +16,10 @@ def get_all_states():
       'State_id': state.id,
       "State": state.state,
     })
-  return jsonify(all_states)
+  return jsonify({
+    'count': len(all_states),
+    'data': all_states
+  }),200
 
 
 @app.route('/university/create', methods=['POST'])
@@ -69,28 +72,36 @@ def create_uni():
     return jsonify(body)
 
 
-"""@app.route('/states/<id>')
-def get_state_university_list(id):
-  universities = get_universities_list_by_state(id)
-  return render_template('institutions.html', data = universities)"""
 
 @app.route('/ownership/private')
 def privateUniversities():
   universities = get_university_by_ownership(1, Universities)
-  return render_template('institutions.html', data = universities)
+  data = universities[0:20]
+  return jsonify({
+    'status_code': 200,
+    'data': data,
+    'total': len(data)
+  }), 200
 
 @app.route('/ownership/state')
 def stateUniversities():
   universities = get_university_by_ownership(2, Universities)
-  return render_template('institutions.html', data = universities) 
+  data = universities[0:20]
+  return jsonify({
+    'status_code': 200,
+    'data': data,
+    'total': len(data)
+  }), 200
+  
 
 @app.route('/ownership/federal/')
 def federalUniversities():
   universities = get_university_by_ownership(3, Universities)
-
+  data = universities[0:20]
   return jsonify({
     'status_code': 200,
-    'data': universities
+    'data': data,
+    'total': len(data)
   }), 200
   # return render_template('institutions.html', data = universities)
 
