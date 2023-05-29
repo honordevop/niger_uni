@@ -84,10 +84,15 @@ def stateUniversities():
   universities = get_university_by_ownership(2, Universities)
   return render_template('institutions.html', data = universities) 
 
-@app.route('/ownership/federal')
+@app.route('/ownership/federal/')
 def federalUniversities():
   universities = get_university_by_ownership(3, Universities)
-  return render_template('institutions.html', data = universities)
+
+  return jsonify({
+    'status_code': 200,
+    'data': universities
+  }), 200
+  # return render_template('institutions.html', data = universities)
 
 
 #   # return jsonify({
