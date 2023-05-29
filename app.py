@@ -78,7 +78,7 @@ def privateUniversities():
   data = universities[0:20]
   return jsonify({
     'count': len(data),
-    'status_code': 200,
+    'status': 200,
     'data': data,
   }), 200
 
@@ -105,18 +105,21 @@ def federalUniversities():
 
 
 
-@app.route('/institutions/search', methods=['GET'])
+@app.route('/university/search', methods=['GET'])
 def search_university_by_abbr():
   universities = search_institution_by_abbr()
+
   if universities:
     data = universities[0:20]
     return jsonify({
-      'status_code': 200,
+      'count': len(data),
+      'status': 200,
       'data': data,
-      'total': len(data)
     }), 200
+  elif universities==None:
+    abort(404)
   else:
-    return 404
+    abort(400)
 
 @app.route('/universities/')
 def fetch_all_universities():
@@ -124,20 +127,6 @@ def fetch_all_universities():
   
   return render_template('institutions.html', data = alluniversities)
 
-@app.route('/university/search')
-def search_a_university():
-  # print('Id is here:'+ id)
-  # university = fetch_single_university(id)
-  universities = search_institution_by_abbr()
-  print(universities)
-  if universities:
-    return render_template('institutions.html', data = universities)
-  else:
-    return render_template('notFound.html', error='Not found')
-  # return university
-  # return render_template('institution.html', uni = university)
-
-# fetch single University
 @app.route('/university/<uni_name>')
 def fetch_a_university_details(uni_name):
   university = fetch_single_university(uni_name)
@@ -180,7 +169,7 @@ def not_found(error):
     return jsonify({
         "success": False,
         "error": 404,
-        "message": "resource not found ooo"
+        "message": "resource not found"
     }), 404
 
 def unprocessable(error):
