@@ -36,16 +36,15 @@
 <body>
 
     <!-- ================NAVIGATION================== -->
-
     <nav class="nav_bar bg-dark container-fluid">
         <div class="container nav_container">
-            <a class="atiniger_logo" href="/"><img src="../static/images/atiNiger.png" alt=""></a>            
+            <a class="atiniger_logo" href="/"><img src="{{ url_for('static', filename='images/atiNiger.png') }}" alt=""></a>            
             
             <div class="nav_drop_down" id="nav_menu">
                 <ul class="drop_down_menu ">
                     <li class="nav_item">
                         <a href="tel:+2348164462713" class="nav_link">
-                            <img class="whatsapp_svg" src="../static/images/whatsapp-svgrepo-com.svg" alt="">
+                            <img class="whatsapp_svg" src="{{ url_for('static', filename='images/whatsapp-svgrepo-com.svg') }}" alt="">
                         </a>
                     </li>
                     <li class="nav_item d-none d-md-block">

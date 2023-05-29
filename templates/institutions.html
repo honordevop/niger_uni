@@ -2,18 +2,24 @@
 
 {% block content %}
 
-{% for university in data %}
+{% for university in pages.items %}
 
 <div class=" container uniItem mt-5">
   <input id="uniId" type="hidden" value="{{ university.id }}">
   <img class="uniImg" src="{{ university.uni_image }}" alt="{{ university.name }}">
 
   <div class="uniDesc">
-    <h1 class="uniName"> {{ university.name }}, {{ university.uni_name_abbr }} </h1>
-    <span class="uniAbout">{{ '%.300s'  %university.about }}...</span>
+    <h1 class="uniName"> {{ university.uni_name }}, {{ university.uni_name_abbr }} </h1>
+    <span class="uniAbout">{{ '%.300s'  %university.about_uni }}...</span>
     <span>
-    <span class="uniLocation">{{ university.location }}</span> 
-    <span class="fw-bold">Owned by: {{ university.owner }}</span>
+    <span class="uniLocation">{{ university.location }}</span>
+    {% if university.ownership_id == 3 %}
+    <span class="fw-bold"> Owned by: Federal</span>
+    {% elif university.ownership_id == 2 %}
+    <span class="fw-bold"> Owned by: State</span>
+    {% elif university.ownership_id == 1 %}
+    <span class="fw-bold"> Owned by: Private</span>
+    {% endif %}
   </span>
     <span class="uniEmail">
       <span class="uniPhone">Contact Email: {{ university.contact_email }}</span>
@@ -24,32 +30,37 @@
     <div class="readMoreTexts">
       
         <button class="readMoreBtn" data-id="{{ university.id }}">
-          <a href="/university/{{ university.name }}">Read more </a>
+          <a href="/university/{{ university.uni_name }}">Read more </a>
         </button>
 
     </div>
   </div>
 </div>
+
 {% endfor %}
 
-
-<!-- <ul id='Universities'>
-    {% for university in ownership %}
-
-    <li class="university_list" id="university_list">
-
-      <input class="check-completed" data-id="{{ university.id }}" type="checkbox">
-      {{ university.name }}
-      <p> {{ university.location }} </p>
-
-      <p> {{ university.about }} </p>
-      
-      <button type="submit" class="delete-button" id="delete-todo" data-id="{{ university.id }}">&cross;</button>
-
+<div aria-label="..." class="pagination">
+  <ul class="pagination">
+    <li class="page-item {% if not pages.has_prev %} disabled {% endif %}">
+      <a class="page-link" href="./?page={{pages.prev_num}}">Previous</a>
     </li>
-
+    {% for page in pages.iter_pages() %}
+    {% if page %}
+    <li class="page-item {% if page == pages.page %} active {% endif %}">
+      <a class="page-link" href="./?page={{page}}"> {{page}} </a>
+    </li>
+    {% else %}
+    <li class="page-item ">
+      <a class="page-link" href="./?page={{page}}"> .... </a>
+    </li>
+      {% endif %}
     {% endfor %}
-</ul> -->
+
+    <li class="page-item {% if not pages.has_next %} disabled {% endif %}">
+      <a class="page-link" href="./?page={{pages.next_num}}">Next</a>
+    </li>
+  </ul>
+</div>
 
 {% endblock %}
 

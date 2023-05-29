@@ -1,5 +1,5 @@
 import sys
-from flask import Flask, render_template, request, redirect, url_for, jsonify, abort
+from flask import Flask, render_template, request, redirect, url_for, jsonify, abort, session
 from config import app
 from model import Universities,Ownership,States
 from datetime import datetime
@@ -74,20 +74,59 @@ def get_state_university_list(id):
   universities = get_universities_list_by_state(id)
   return render_template('institutions.html', data = universities)"""
 
-@app.route('/ownership/private')
+@app.route('/ownership/private/')
 def privateUniversities():
-  universities = get_university_by_ownership(1, Universities)
-  return render_template('institutions.html', data = universities)
+  # universities = get_university_by_ownership(1, Universities)
+  universities = Universities.query.filter_by(ownership_id=1)
 
-@app.route('/ownership/state')
+  page = request.args.get('page')
+  print(page)
+
+  if page and page.isdigit():
+    page = int(page)
+  else:
+    page = 1
+
+  pages = universities.paginate(page, per_page=5)
+  return render_template('institutions.html', data = universities, pages=pages)
+  
+
+@app.route('/ownership/state/')
 def stateUniversities():
-  universities = get_university_by_ownership(2, Universities)
-  return render_template('institutions.html', data = universities) 
+  # universities = get_university_by_ownership(2, Universities)
+  universities = Universities.query.filter_by(ownership_id=2)
 
-@app.route('/ownership/federal')
+  page = request.args.get('page')
+  print(page)
+
+  if page and page.isdigit():
+    page = int(page)
+  else:
+    page = 1
+
+  pages = universities.paginate(page, per_page=5)
+  return render_template('institutions.html', data = universities, pages=pages)
+   
+
+@app.route('/ownership/federal/')
 def federalUniversities():
-  universities = get_university_by_ownership(3, Universities)
-  return render_template('institutions.html', data = universities)
+  # universities = get_university_by_ownership(3, Universities)
+  universities = Universities.query.filter_by(ownership_id=3)
+
+  page = request.args.get('page')
+  print(page)
+
+  if page and page.isdigit():
+    page = int(page)
+  else:
+    page = request.args.get('page', 1, type=int)
+
+  pages = universities.paginate(page, per_page=5)
+  # return jsonify({
+  #   "data": uni,
+  #   "pages": pages.items
+  # })
+  return render_template('institutions.html', data = universities, pages=pages)
 
 
 #   # return jsonify({
@@ -116,8 +155,6 @@ def fetch_all_universities():
 
 @app.route('/university/search')
 def search_a_university():
-  # print('Id is here:'+ id)
-  # university = fetch_single_university(id)
   universities = search_institution_by_abbr()
   print(universities)
   if universities:
@@ -138,13 +175,33 @@ def fetch_a_university_details(uni_name):
     return render_template('notFound.html', error='Not found')
 
 
-@app.route('/universities/search', methods=['GET'])
+@app.route('/universities/search/', methods=['GET'])
 def search_universities_by_state():
-  result = institutionListByState()
-  if result:
-    return render_template('institutions.html', data = result)
+  statename = request.args.get('state')
+  session["statename"] = statename
+  if not statename:
+      statename = session.get("statename")
+
+      
+      
+  if statename:
+    stateSearched = States.query.filter(States.state.ilike("%" + statename + "%")).first()
+  # result = institutionListByState()
+    if stateSearched:
+      universities = Universities.query.filter_by(state_id=stateSearched.id)
   else:
     return render_template('notFound.html', error='Not found')
+  
+  page = request.args.get('page')
+
+  if page and page.isdigit():
+    page = int(page)
+  else:
+    page = 1
+
+  pages = universities.paginate(page, per_page=5)
+
+  return render_template('institutions.html', data = universities, pages=pages, route="/universities/search/")
 
 @app.route('/admin/', defaults={'state_id': 1})
 @app.route('/admin/<state_id>')
@@ -162,7 +219,8 @@ def footer():
 
 @app.route('/')
 def index():
-  return render_template('index.html')
+  count = Universities.query.count()
+  return render_template('index.html', count = count)
   # return redirect(url_for('get_universities_list'))
 
 @app.errorhandler(404)
