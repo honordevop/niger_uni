@@ -99,9 +99,8 @@ def fetchAllUniversities():
   alluniversities = institutionListFxn(universities)
   return alluniversities
 
-def fetch_single_university(uni_name):
-  # name = request.args.get(id)
-  university = Universities.query.filter_by(uni_name=uni_name).order_by('id').all()  
+def fetch_single_university(id):
+  university = Universities.query.filter_by(id=id)  
   university_details = institutionListFxn(university)
   return university_details
 

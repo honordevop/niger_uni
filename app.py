@@ -72,7 +72,7 @@ def create_uni():
     return jsonify(body)
 
 
-@app.route('/ownership/private/')
+@app.route('/universities/ownership/private/')
 def privateUniversities():
   universities = get_university_by_ownership(1, Universities)
   data = universities[0:20]
@@ -82,7 +82,7 @@ def privateUniversities():
     'data': data,
   }), 200
 
-@app.route('/ownership/state/')
+@app.route('/universities/ownership/state/')
 def stateUniversities():
   universities = get_university_by_ownership(2, Universities)
   data = universities[0:20]
@@ -93,7 +93,7 @@ def stateUniversities():
   }), 200
   
 
-@app.route('/ownership/federal/')
+@app.route('/universities/ownership/federal/')
 def federalUniversities():
   universities = get_university_by_ownership(3, Universities)
   data = universities[0:20]
@@ -123,18 +123,36 @@ def search_university_by_abbr():
 
 @app.route('/universities/')
 def fetch_all_universities():
-  alluniversities = fetchAllUniversities()
-  
-  return render_template('institutions.html', data = alluniversities)
-
-@app.route('/university/<uni_name>')
-def fetch_a_university_details(uni_name):
-  university = fetch_single_university(uni_name)
-  # return jsonify(university)
-  if (university):
-    return render_template('institution.html', uni=university[0])
+  universities = fetchAllUniversities()
+  data = universities[0:20]
+  if data:
+    return jsonify({
+      'count': len(data),
+      'status': 200,
+      'data': data,
+    }), 200
+  elif data==None:
+    abort(404)
   else:
-    return render_template('notFound.html', error='Not found')
+    abort(400)
+
+    
+@app.route('/university/<int:id>')
+def fetch_a_university_details(id):
+  universities = fetch_single_university(id)
+  # return jsonify(university)
+  
+  if (universities):
+    data = universities[0:20]
+    return jsonify({
+      'count': len(data),
+      'status': 200,
+      'data': data,
+    }), 200
+  elif universities==None:
+    abort(404)
+  else:
+    abort(400)
 
 
 @app.route('/universities/search', methods=['GET'])
