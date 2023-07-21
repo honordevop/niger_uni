@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, a
 from config import app
 from model import Universities,Ownership,States
 from datetime import datetime
+import random
 from helperFxn import get_university_by_ownership, search_institution_by_abbr, fetchAllUniversities, fetch_single_university, institutionListByState
 
 
@@ -74,8 +75,12 @@ def create_uni():
 
 @app.route('/universities/ownership/private/')
 def privateUniversities():
-  universities = get_university_by_ownership(1, Universities)
-  data = universities[0:20]
+  try:
+    universities = get_university_by_ownership(1, Universities)
+  except:
+    abort(400)
+  sliced = 20
+  data = random.sample(universities, sliced)
   return jsonify({
     'count': len(data),
     'status': 200,
@@ -84,8 +89,12 @@ def privateUniversities():
 
 @app.route('/universities/ownership/state/')
 def stateUniversities():
-  universities = get_university_by_ownership(2, Universities)
-  data = universities[0:20]
+  try:
+    universities = get_university_by_ownership(2, Universities)
+  except:
+    abort(400)
+  sliced = 20
+  data = random.sample(universities, sliced)
   return jsonify({
     'count': len(data),
     'status': 200,
@@ -95,8 +104,12 @@ def stateUniversities():
 
 @app.route('/universities/ownership/federal/')
 def federalUniversities():
-  universities = get_university_by_ownership(3, Universities)
-  data = universities[0:20]
+  try:
+    universities = get_university_by_ownership(3, Universities)
+  except:
+    abort(400)
+  sliced = 20
+  data = random.sample(universities, sliced)
   return jsonify({
     'count': len(data),
     'status': 200,
@@ -104,11 +117,12 @@ def federalUniversities():
   }), 200
 
 
-
 @app.route('/university/search', methods=['GET'])
 def search_university_by_abbr():
-  universities = search_institution_by_abbr()
-
+  try:
+    universities = search_institution_by_abbr()
+  except:
+    abort(400)
   if universities:
     data = universities[0:20]
     return jsonify({
@@ -123,8 +137,12 @@ def search_university_by_abbr():
 
 @app.route('/universities/')
 def fetch_all_universities():
-  universities = fetchAllUniversities()
-  data = universities[0:20]
+  try:
+    universities = fetchAllUniversities()
+  except:
+    abort(400)
+  sliced = 20
+  data = random.sample(universities, sliced)
   if data:
     return jsonify({
       'count': len(data),
@@ -139,11 +157,14 @@ def fetch_all_universities():
     
 @app.route('/university/<int:id>')
 def fetch_a_university_details(id):
-  universities = fetch_single_university(id)
+  try:
+    universities = fetch_single_university(id)
+  except:
+    abort(400)
   # return jsonify(university)
   
   if (universities):
-    data = universities[0:20]
+    data = universities
     return jsonify({
       'count': len(data),
       'status': 200,
@@ -157,11 +178,25 @@ def fetch_a_university_details(id):
 
 @app.route('/universities/search', methods=['GET'])
 def search_universities_by_state():
-  result = institutionListByState()
-  if result:
-    return render_template('institutions.html', data = result)
+  try:
+    result = institutionListByState()
+  except:
+    abort(400)
+  if (result):
+    data = result[0:20]
+    return jsonify({
+      'count': len(data),
+      'status': 200,
+      'data': data,
+    }), 200
+  elif result==None:
+    abort(404)
   else:
-    return render_template('notFound.html', error='Not found')
+    abort(400)
+  # if result:
+  #   return render_template('institutions.html', data = result)
+  # else:
+  #   return render_template('notFound.html', error='Not found')
 
 @app.route('/admin/', defaults={'state_id': 1})
 @app.route('/admin/<state_id>')
