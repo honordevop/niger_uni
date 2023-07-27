@@ -4,8 +4,11 @@ from config import app
 from model import Universities,Ownership,States
 from datetime import datetime
 import random
-from helperFxn import get_university_by_ownership, search_institution_by_abbr, fetchAllUniversities, fetch_single_university, institutionListByState
+from flask_cors import CORS
+from helperFxn import get_university_by_ownership, search_institution_by_abbr, fetchAllUniversities, fetch_single_university, institutionListByState, fetchTopChoiceUniversity
 
+
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route('/states/')
 def get_all_states():
@@ -117,6 +120,7 @@ def federalUniversities():
   }), 200
 
 
+
 @app.route('/university/search', methods=['GET'])
 def search_university_by_abbr():
   try:
@@ -197,6 +201,19 @@ def search_universities_by_state():
   #   return render_template('institutions.html', data = result)
   # else:
   #   return render_template('notFound.html', error='Not found')
+
+@app.route('/universities/topchoice/')
+def TopUniversities():
+  try:
+    universities = fetchTopChoiceUniversity()
+  except:
+    abort(400)
+  data = universities
+  return jsonify({
+    'count': len(data),
+    'status': 200,
+    'data': data,
+  }), 200
 
 @app.route('/admin/', defaults={'state_id': 1})
 @app.route('/admin/<state_id>')

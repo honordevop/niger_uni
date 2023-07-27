@@ -1,6 +1,7 @@
 import sys
 from model import Universities,Ownership,States
-from flask import render_template, request
+from flask import render_template, request, abort
+from sqlalchemy import or_
 
 
 def institutionListFxn(universities, id=''):
@@ -104,6 +105,28 @@ def fetch_single_university(id):
   university_details = institutionListFxn(university)
   return university_details
 
+def fetchTopChoiceUniversity():
+  ids = ['6', '26', '32', '33', '35', '37', '38', '126']
 
+  sample = []
+  for id in ids:
+    topChoice = Universities.query.filter(Universities.id.in_([id])).all()
+    for res in topChoice:
+      location = res.location.split(",")      
+      sample.append({
+      'id': res.id,
+      'uni_name': res.uni_name,
+      'location': location[0],
+      'state': location[1],
+      'image': res.uni_image
+      
+    })
+  # result = session.query(Customers).filter(or_(Customers.id>2, Customers.name.like('Ra%')))
+  # print(sample)
+  if (sample):
+    return sample
+  # if (universities2):
+  else:
+    abort(404)
 
 
