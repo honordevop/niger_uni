@@ -165,7 +165,7 @@ a:hover{
 
 .hero_search_form {
     /* height: 6rem; */
-    position: sticky;
+    position: sticky !important;
     top: 0;
     background-color: white;
     z-index: 200;
