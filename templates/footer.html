@@ -1,20 +1,28 @@
 <!-- Footer -->
 
-<footer class="container-fluid bg-light pt-3">
+<footer class="container-fluid pt-3 footer_">
     <hr>
     <div class="container">
-        <div class="row">
+        <div class="row footer_row">
             <div class="col">
-                <div class="atiniger_footer_logo bg-dark">
+                <div class="atiniger_footer_logo">
                     <a href="/"><img src="{{ url_for('static', filename='images/atiNiger.png') }}" alt=""></a>
                 </div>
-                <p class="footer_text mt-4">
+                <p class="footer_text mt-4 mb-3">
                     Search Universities in Nigeria from a single endpoint
                 </p>
+                <div class="d-none d-md-block mt-3">
+                    <a class="call_link" href="tel: +24308164462713">
+                    <ul class="footer_list h4">
+                        <li class="navIcon"><i class="bi bi-telephone-forward-fill"></i></li>
+                        <li class="callDev">Call Developer</li>
+                    </ul>
+                    </a>
+                </div>
             </div>
             <div class="col">
                 <ul class="footer_link">
-                    <h6 class="mb-1">By Ownerships</h6>
+                    <h6 class="mb-1">Search by Ownerships:</h6>
                     <li><a href="/ownership/federal">Federal Universities</a> </li>
                     <li><a href="/ownership/state">State Universities</a> </li>
                     <li><a href="/ownership/private">Private Universities</a> </li>
@@ -29,8 +37,14 @@
                 <p>
                     Are you a Developer? The API endpoints can be accessed for free.
                 </p>
-                <p>Contact the Team:</p>
-                <a class="phone" href="tel:+2348164462713">(+234)8164462713</a>
+                <div class="d-block d-md-none pb-3">
+                    <a class="call_link" href="tel: +24308164462713">
+                    <ul class="footer_list h4">
+                        <li class="navIcon"><i class="bi bi-telephone-forward-fill"></i></li>
+                        <li class="callDev">Call Developer</li>
+                    </ul>
+                    </a>
+                </div>
             </div>
         </div>
 
