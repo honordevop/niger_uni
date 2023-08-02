@@ -1,6 +1,6 @@
 import sys
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort, session
-from config import app
+from config import app, db
 from model import Universities,Ownership,States
 from datetime import datetime
 from helperFxn import get_university_by_ownership, search_institution_by_abbr, fetchAllUniversities, fetch_single_university, institutionListByState
