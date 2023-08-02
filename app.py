@@ -1,11 +1,13 @@
 import sys
 from flask import Flask, render_template, request, redirect, url_for, jsonify, abort, session
-from config import app, db
+from config import create_app
 from model import Universities,Ownership,States
 from datetime import datetime
 from helperFxn import get_university_by_ownership, search_institution_by_abbr, fetchAllUniversities, fetch_single_university, institutionListByState
 
 
+app_item = create_app()
+app = app_item[0]
 @app.route('/states')
 def get_all_states():
   all_states=[]

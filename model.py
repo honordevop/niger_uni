@@ -1,8 +1,10 @@
 
 from flask_sqlalchemy import SQLAlchemy
-from config import db
+from config import create_app
 
-
+print(create_app())
+app_item = create_app()
+db = app_item[1]
 
 class Ownership(db.Model):
   __tablename__ = 'ownership'

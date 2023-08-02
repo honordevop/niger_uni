@@ -1,4 +1,4 @@
-from config import app
+from config import create_app
 
 
-app = app
+app = create_app()
