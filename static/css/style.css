@@ -261,7 +261,6 @@ li {
     align-content: center;
     /* width: max-content;
     height: max-content; */
-
     /* width: 20rem;
     height: 15rem; */
 }
@@ -274,7 +273,7 @@ li {
 
 /* footer */
 .footer_{
-    background-color: #030f27;
+    background-color: hsl(220, 86%, 8%);
     padding-bottom: 2rem;
 }
 
