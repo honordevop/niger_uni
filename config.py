@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:08164462713@localhost:5432/nigeruni'
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

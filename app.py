@@ -99,7 +99,6 @@ def stateUniversities():
   universities = Universities.query.filter_by(ownership_id=2)
 
   page = request.args.get('page')
-  print(page)
 
   if page and page.isdigit():
     page = int(page)
@@ -116,7 +115,6 @@ def federalUniversities():
   universities = Universities.query.filter_by(ownership_id=3)
 
   page = request.args.get('page')
-  print(page)
 
   if page and page.isdigit():
     page = int(page)
@@ -145,15 +143,33 @@ def federalUniversities():
 def search_university_by_abbr():
   universities = search_institution_by_abbr()
   if universities:
-    return render_template('searchResult.html', data = universities)
+    page = request.args.get('page')
+
+    if page and page.isdigit():
+      page = int(page)
+    else:
+      page = 1
+
+    pages = universities.paginate(page, per_page=5)
+    return render_template('institutions.html', data = universities, pages=pages)
   else:
     return render_template('notFound.html', error='Not found')
 
 @app.route('/universities/')
 def fetch_all_universities():
-  alluniversities = fetchAllUniversities()
+  universities = fetchAllUniversities()
   
-  return render_template('institutions.html', data = alluniversities)
+  page = request.args.get('page')
+  print(page)
+
+  if page and page.isdigit():
+    page = int(page)
+  else:
+    page = 1
+
+  pages = universities.paginate(page, per_page=5)
+  return render_template('institutions.html', data = universities, pages=pages)
+  # return render_template('institutions.html', data = alluniversities)
 
 @app.route('/university/search')
 def search_a_university():
