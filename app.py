@@ -143,15 +143,15 @@ def federalUniversities():
 def search_university_by_abbr():
   universities = search_institution_by_abbr()
   if universities:
-    page = request.args.get('page')
+    # page = request.args.get('page')
 
-    if page and page.isdigit():
-      page = int(page)
-    else:
-      page = 1
+    # if page and page.isdigit():
+    #   page = int(page)
+    # else:
+    #   page = 1
 
-    pages = universities.paginate(page, per_page=5)
-    return render_template('institutions.html', data = universities, pages=pages)
+    # pages = universities.paginate(page, per_page=5)
+    return render_template('institutions.html', data = universities)
   else:
     return render_template('notFound.html', error='Not found')
 
