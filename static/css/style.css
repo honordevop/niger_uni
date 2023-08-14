@@ -501,7 +501,7 @@ small {
 .wrapper{
     max-width: 1000px !important;
     padding: 0 20px;
-    text-align: justify;
+    /* text-align: justify; */
 }
 
 .ubi_about_container{
