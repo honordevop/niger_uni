@@ -26,5 +26,11 @@ Get A University details page
 http://127.0.0.1:5000/university/Bayero%20University
 
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:08164462713@localhost:5432/nigeruni'
+
+
+
+psql 'postgresql://ogunladestephen20:4MXKZlRG1bWL@ep-quiet-mode-04867740.us-east-2.aws.neon.tech/atinigerdb?sslmode=require'
+
 
 
