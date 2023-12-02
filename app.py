@@ -177,7 +177,7 @@ def fetch_all_universities():
 @app.route('/university/search')
 def search_a_university():
     universities = search_institution_by_abbr()
-    # print(universities)
+    print(universities)
     if universities:
         return render_template('searchResult.html', data=universities)
     else:
